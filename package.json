@@ -1,0 +1,24 @@
+{
+  "name": "homelands-api",
+  "version": "1.0.0",
+  "description": "API for Homelands Project",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michmich16/Homelands-API.git"
+  },
+  "author": "Michael P",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michmich16/Homelands-API/issues"
+  },
+  "homepage": "https://github.com/michmich16/Homelands-API#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
