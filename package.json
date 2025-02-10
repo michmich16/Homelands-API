@@ -19,6 +19,8 @@
   "homepage": "https://github.com/michmich16/Homelands-API#readme",
   "dependencies": {
     "dotenv": "^16.4.7",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "mysql2": "^3.12.0",
+    "sequelize": "^6.37.5"
   }
 }
