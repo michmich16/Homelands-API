@@ -1,9 +1,9 @@
 import sequelize from "../config/sequelizeClient.js";
 import { Model, DataTypes } from 'sequelize'
 
-export class estate_typesModel extends Model { }
+export class estate_typeModel extends Model { }
 
-estate_typesModel.init({
+estate_typeModel.init({
     id: {
         type: DataTypes.BIGINT,
         autoIncrement: true,
@@ -16,7 +16,7 @@ estate_typesModel.init({
     },
 }, {
     sequelize,
-    modelName: 'city',
+    modelName: 'estate_type',
     underscored: true, // True: city_names || False: cityNames
     freezeTableName: true, // True: city || False: cities
     createdAt: true, // Tilføjer createdAt felt

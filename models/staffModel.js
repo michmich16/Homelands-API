@@ -36,7 +36,7 @@ staffModel.init({
     },
 }, {
     sequelize,
-    modelName: 'city',
+    modelName: 'staff',
     underscored: true, // True: city_names || False: cityNames
     freezeTableName: true, // True: city || False: cities
     createdAt: true, // Tilføjer createdAt felt

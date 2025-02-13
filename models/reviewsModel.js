@@ -40,7 +40,7 @@ reviewsModel.init({
     }
 }, {
     sequelize,
-    modelName: 'city',
+    modelName: 'review',
     underscored: true, // True: city_names || False: cityNames
     freezeTableName: true, // True: city || False: cities
     createdAt: true, // Tilføjer createdAt felt
