@@ -1,105 +1,93 @@
-import express from 'express'
-import { citiesModel } from '../models/citiesModel.js'
+import express from 'express';
+import citiesModel from '../models/citiesModel.js';
+import { errorResponse, successResponse } from '../utils/mainUtils.js';
 
-export const citiesController = express.Router()
+export const citiesController = express.Router();
 
-//READ all cities
+/**
+ * READ: Fetch all cities from the database
+ */
 citiesController.get('/cities', async (req, res) => {
     try {
-        const data = await citiesModel.findAll({
-            attributes: ['id', 'name', 'zipcode']
-        })
-        if (!data || data.length === 0) {
-            return res.json({ message: 'No data found' })
-        }
-        res.json(data)
-    } catch (error) {
-        console.error(`Could not get brand list: ${error}`)
-    }
-})
+        const list = await citiesModel.findAll();
 
-//READ city detail
-citiesController.get('/cities/:id([0-9]*)', async (req, res) => {
+        // Check if no users are found
+        if (!list || list.length === 0) {
+            return errorResponse(res, 'No cities found', 404)
+        }
+
+        successResponse(res, list);
+    } catch (error) {
+        errorResponse(res, `Error fetching cities: ${error.message}`);
+    }
+});
+
+/**
+ * READ: Fetch a single cities by ID
+ */
+citiesController.get('/cities/:id([0-9]+)', async (req, res) => {
     try {
-        const { id } = req.params
-        const data = await citiesModel.findOne({
-            where: {
-                id: id
-            }
-        })
+        const id = parseInt(req.params.id, 10);
 
-        if (!data) {
-            return res.json({ message: `Could not find brand on id #${id}` })
-        }
+        let details = await citiesModel.findOne({
+            where: { id: id }
+        });
 
-        return res.json(data);
+        if (!details) return errorResponse(res, "cities not found", 404);
 
+        successResponse(res, cities);
     } catch (error) {
-        console.error(`Could not get brand details: ${error}`)
+        errorResponse(res, `Error fetching cities: ${error.message}`);
     }
-})
+});
 
-//CREATE
+/**
+ * CREATE: Add a new user to the database
+ */
 citiesController.post('/cities', async (req, res) => {
-    const { name, zipcode } = req.body;
-
-    if (!name || !zipcode) {
-        return res.json({ message: 'Missing required data' })
-    }
-
     try {
-        const result = await citiesModel.create({
-            name, zipcode
-        })
-
-        res.status(201).json(result)
+        let { zipcode, name } = req.body;
+        const result = await citiesModel.create({ zipcode, name });
+        successResponse(res, result, "cities created successfully", 201);
     } catch (error) {
-        return res.json({ message: `Could not create city: ${error.message}` })
+        errorResponse(res, `Error creating cities:`, error);
     }
-})
+});
 
-
-//UPDATE
-citiesController.put('/cities', async (req, res) => {
-    const { name, zipcode, id } = req.body;
-
-    if (!id || !name || !zipcode) {
-        return res.json({ message: 'Missing required data' })
-    }
-
+/**
+ * UPDATE: Update an existing user
+ */
+citiesController.put('/cities/:id([0-9]+)', async (req, res) => {
     try {
-        const result = await citiesModel.update({
-            name, zipcode
-        },
-            { where: { id } }
-        )
-        if (result) {
-            res.json({ message: `Updated city id#${id}` })
-        }
-    } catch (error) {
-        return res.json({ message: `Could not update city: ${error.message}` })
-    }
-})
+        const { id } = req.params;
+        const { zipcode, name } = req.body;
 
-//DELETE
-citiesController.delete('/cities/:id([0-9]*)', async (req, res) => {
-    const { id } = req.params
-    if(id) {
-        try {
-            await citiesModel.destroy({
-                where: { id }
-            })
-            res.send({
-                message: `Record #${id} deleted`
-            })
-        } catch (error) {
-            res.send(`Error! Could not delete city: ${error}`)
-        }
-    } else {
-        res.send({
-            message: 'Id not valid'
-        })
+        // Validate that all required fields are provided
+        if (!zipcode || !name) return errorResponse(res, "All fields are required", 400);
+
+        const [updated] = await citiesModel.update({ zipcode, name }, { where: { id } });
+
+        if (!updated) return errorResponse(res, `No cities found with ID: ${id}`, 404);
+
+        successResponse(res, { id, zipcode, name }, "cities updated successfully");
+
+    } catch (error) {
+        errorResponse(res, `Error updating cities: ${error.message}`);
     }
-    
-    
-})
+});
+
+/**
+ * DELETE: Remove a cities by ID
+ */
+citiesController.delete('/cities/:id([0-9]+)', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deleted = await citiesModel.destroy({ where: { id } });
+
+        if (!deleted) return errorResponse(res, `No cities found with ID: ${id}`, 404);
+
+        successResponse(res, null, "cities deleted successfully");
+    } catch (error) {
+        errorResponse(res, `Error deleting cities: ${error.message}`);
+    }
+});
