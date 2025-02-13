@@ -1,9 +1,9 @@
 import sequelize from "../config/sequelizeClient.js";
 import { Model, DataTypes } from 'sequelize'
 
-export class estate_typeModel extends Model { }
+export class estate_typesModel extends Model { }
 
-estate_typeModel.init({
+estate_typesModel.init({
     id: {
         type: DataTypes.BIGINT,
         autoIncrement: true,

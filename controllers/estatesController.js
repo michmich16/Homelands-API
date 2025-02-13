@@ -1,8 +1,20 @@
 import express from 'express';
-import estatesModel from '../models/estatesModel.js';
 import { errorResponse, successResponse } from '../utils/mainUtils.js';
+import { citiesModel } from '../models/citiesModel.js'
+import { estatesModel } from '../models/estatesModel.js'
+import { estate_typesModel } from '../models/estate_typesModel.js'
+import { energy_labelsModel } from '../models/energy_labelsModel.js'
 
 export const estatesController = express.Router();
+
+// Relations
+
+estatesModel.belongsTo(citiesModel);
+citiesModel.hasMany(estatesModel);
+estatesModel.belongsTo(estate_typesModel);
+estate_typesModel.hasMany(estatesModel);
+estatesModel.belongsTo(energy_labelsModel);
+energy_labelsModel.hasMany(estatesModel);
 
 /**
  * READ: Fetch all estates from the database

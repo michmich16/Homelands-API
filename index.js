@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { dbController } from './controllers/dbController.js'
 import sequelize from './config/sequelizeClient.js';
 import { authController } from './controllers/authController.js';
+import {estatesController} from './controllers/estatesController.js'
 
 
 dotenv.config()
