@@ -4,7 +4,16 @@ import dotenv from 'dotenv';
 import { dbController } from './controllers/dbController.js'
 import sequelize from './config/sequelizeClient.js';
 import { authController } from './controllers/authController.js';
-import {estatesController} from './controllers/estatesController.js'
+import { estatesController } from './controllers/estatesController.js';
+import { citiesController } from './controllers/citiesController.js';
+import { energy_labelsController } from './controllers/energy_labelsController.js';
+import { estate_image_relController } from './controllers/estate_image_relController.js';
+import { estate_typesController } from './controllers/estate_typesController.js';
+import { favoritesController } from './controllers/favoritesController.js';
+import { imagesController } from './controllers/imagesController.js';
+import { reviewsController } from './controllers/reviewsController.js';
+import { staffController } from './controllers/staffController.js';
+import { usersController } from './controllers/usersController.js';
 
 
 dotenv.config()
@@ -22,6 +31,16 @@ app.get('/', (req, res) => {
 app.use(
   dbController,
   authController,
+  estatesController,
+  citiesController,
+  energy_labelsController,
+  estate_image_relController,
+  estate_typesController,
+  favoritesController,
+  imagesController,
+  reviewsController,
+  staffController,
+  usersController,
 )
 
 app.get('/about', (req, res) => {

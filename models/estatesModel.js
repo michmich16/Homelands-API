@@ -11,7 +11,7 @@ estatesModel.init({
         primaryKey: true,
     },
     address: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     price: {
@@ -50,7 +50,7 @@ estatesModel.init({
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    base_space:{
+    basement_space:{
         type: DataTypes.INTEGER,
         allowNull: false,
     },

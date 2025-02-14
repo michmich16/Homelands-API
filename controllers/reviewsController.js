@@ -1,5 +1,5 @@
 import express from 'express';
-import reviewsModel from '../models/reviewsModel.js';
+import {reviewsModel} from '../models/reviewsModel.js';
 import { errorResponse, successResponse } from '../utils/mainUtils.js';
 
 export const reviewsController = express.Router();

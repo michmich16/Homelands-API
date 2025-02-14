@@ -1,5 +1,5 @@
 import express from 'express';
-import staffModel from '../models/staffModel.js';
+import {staffModel} from '../models/staffModel.js';
 import { errorResponse, successResponse } from '../utils/mainUtils.js';
 
 export const staffController = express.Router();
@@ -33,13 +33,15 @@ staffController.get('/staff/:id([0-9]+)', async (req, res) => {
             where: { id: id }
         });
 
-        if (!details) return errorResponse(res, "staff not found", 404);
+        if (!details) return errorResponse(res, "Staff not found", 404);
 
-        successResponse(res, staff);
+        successResponse(res, details); // Use 'details' instead of 'estates'
     } catch (error) {
+        console.error("Error fetching staff:", error); // Log the error
         errorResponse(res, `Error fetching staff: ${error.message}`);
     }
 });
+
 
 /**
  * CREATE: Add a new user to the database

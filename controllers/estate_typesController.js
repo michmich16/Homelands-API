@@ -1,5 +1,5 @@
 import express from 'express';
-import estate_typesModel from '../models/estate_typesModel.js';
+import {estate_typesModel} from '../models/estate_typesModel.js';
 import { errorResponse, successResponse } from '../utils/mainUtils.js';
 
 export const estate_typesController = express.Router();

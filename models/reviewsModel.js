@@ -11,7 +11,7 @@ reviewsModel.init({
         primaryKey: true,
     },
     subject: {
-        type: DataTypes.BIGINT,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     comment: {

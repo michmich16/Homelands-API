@@ -14,8 +14,8 @@ estate_image_relModel.init({
         type: DataTypes.BIGINT,
         allowNull: false,
     },
-    image: {
-        type: DataTypes.BIGINT,
+    image_id: {
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
     is_main: {

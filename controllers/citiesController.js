@@ -1,5 +1,5 @@
 import express from 'express';
-import citiesModel from '../models/citiesModel.js';
+import { citiesModel } from '../models/citiesModel.js';
 import { errorResponse, successResponse } from '../utils/mainUtils.js';
 
 export const citiesController = express.Router();
@@ -33,11 +33,12 @@ citiesController.get('/cities/:id([0-9]+)', async (req, res) => {
             where: { id: id }
         });
 
-        if (!details) return errorResponse(res, "cities not found", 404);
+        if (!details) return errorResponse(res, `City with id #${id} not found`, 404);
 
-        successResponse(res, cities);
+        successResponse(res, details); // Use 'details' instead of 'estates'
     } catch (error) {
-        errorResponse(res, `Error fetching cities: ${error.message}`);
+        console.error(`Error fetching city:`, error); // Log the error
+        errorResponse(res, `Error fetching city: ${error.message}`);
     }
 });
 

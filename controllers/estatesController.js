@@ -45,11 +45,12 @@ estatesController.get('/estates/:id([0-9]+)', async (req, res) => {
             where: { id: id }
         });
 
-        if (!details) return errorResponse(res, "estates not found", 404);
+        if (!details) return errorResponse(res, `Estate with id #${id} not found`, 404);
 
-        successResponse(res, estates);
+        successResponse(res, details); // Use 'details' instead of 'estates'
     } catch (error) {
-        errorResponse(res, `Error fetching estates: ${error.message}`);
+        console.error(`Error fetching estate:`, error); // Log the error
+        errorResponse(res, `Error fetching estate: ${error.message}`);
     }
 });
 

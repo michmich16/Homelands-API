@@ -1,5 +1,5 @@
 import express from 'express';
-import imagesModel from '../models/imagesModel.js';
+import {imagesModel} from '../models/imagesModel.js';
 import { errorResponse, successResponse } from '../utils/mainUtils.js';
 
 export const imagesController = express.Router();

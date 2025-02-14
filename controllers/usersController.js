@@ -1,5 +1,5 @@
 import express from 'express';
-import usersModel from '../models/usersModel.js';
+import {usersModel} from '../models/usersModel.js';
 import { errorResponse, successResponse } from '../utils/mainUtils.js';
 
 export const usersController = express.Router();
